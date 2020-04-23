@@ -22,6 +22,17 @@ function reducer(state, action) {
   }
 }
 ```
+```js
+// correction
+function reducer(state, action) {
+  if (action.type === 'MAKE_FRIEND') {
+    return {
+      ...state
+      state.bestFriend = action.gerald.firstName;
+    }
+  }
+}
+```
 
 ---
 
@@ -43,7 +54,21 @@ function reducer(state, action) {
   }
 }
 ```
-
+```js
+// correction
+function reducer(state, action) {
+  if (action.type === 'ADD_KETCHUP') {
+    return {
+      ...state: {
+        burgerToppings: [
+          ...state.burgerToppings,
+          state.burgerToppings.push("ketchup")
+        ]
+      }
+    }
+  }
+}
+```
 ---
 
 <Timer />
@@ -126,7 +151,16 @@ function reducer(state, action) {
   }
 }
 ```
-
+```js
+// correction
+function reducer(state, action) {
+  if (action.type === 'MAKE_FRIEND') {
+    return produce(state, draftState => {
+      draftState.bestFriend = action.gerald.firstName
+    })
+  }
+}
+```
 ---
 
 ## Exercises
@@ -147,7 +181,16 @@ function reducer(state, action) {
   }
 }
 ```
-
+```js
+// corection
+function reducer(state, action) {
+  if (action.type === 'ADD_KETCHUP') {
+    return produce(state, state2 => {
+      state2.burgerToppings.push("ketchup")
+    })
+  }
+}
+```
 ---
 
 ```js
@@ -177,6 +220,17 @@ function reducer(state, action) {
     delete state.competitors[teamId].racers[racerName];
 
     return state;
+  }
+}
+```
+```js
+// correction
+function reducer(state, action) {
+  if (action.type === 'REMOVE_RACER_FROM_TEAM') {
+    const { teamId, racerName } = action;
+    return produce(state, state2 => {
+      delete state2.competitors[teamId].racers[racerName];
+    })
   }
 }
 ```
